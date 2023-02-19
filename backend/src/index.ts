@@ -3,7 +3,7 @@ import * as mongoose from "mongoose";
 import express from "express";
 import * as bodyParser from "body-parser";
 import { AppCreator } from "./interfaces/AppCreator";
-import {getRateItUpTokenDaoInstance } from "./daoLayer/rateItUpTokenDao";
+import cors from 'cors'
 
 export class App implements AppCreator {
   private static instance: App;
@@ -36,6 +36,8 @@ export class App implements AppCreator {
     this.app.use(bodyParser.json());
     // parse application/x-www-form-urlencoded
     this.app.use(bodyParser.urlencoded({ extended: false, limit: "50mb" }));
+
+    this.app.use(cors({ origin: true, credentials: true }));
 
     this.app.use(function (req, res, next) {
       res.header("Access-Control-Allow-Origin", "*");
