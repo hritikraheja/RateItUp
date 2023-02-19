@@ -3,7 +3,8 @@ import * as mongoose from "mongoose";
 import express from "express";
 import * as bodyParser from "body-parser";
 import { AppCreator } from "./interfaces/AppCreator";
-import cors from 'cors'
+import cors from "cors";
+import path from "path";
 
 export class App implements AppCreator {
   private static instance: App;
@@ -14,13 +15,14 @@ export class App implements AppCreator {
   }
 
   async initializeServer() {
-    try{
-      this.connectWithDatabase()
-        await this.loadMiddlewares()
-        this.loadEndpoints()
-        this.start()
-    } catch(e){
-        console.log(e)
+    try {
+      this.connectWithDatabase();
+      await this.loadMiddlewares();
+      this.loadEndpoints();
+      this.start();
+      console.log(__dirname);
+    } catch (e) {
+      console.log(e);
     }
   }
 
@@ -49,7 +51,7 @@ export class App implements AppCreator {
         "Access-Control-Allow-Methods",
         "PUT, POST, PATCH, GET, DELETE, OPTIONS"
       );
-      console.log(`${req.method} ${req.originalUrl} (${new Date()})`)
+      console.log(`${req.method} ${req.originalUrl} (${new Date()})`);
 
       if ("OPTIONS" === req.method) {
         res.send(200);
@@ -59,23 +61,28 @@ export class App implements AppCreator {
     });
   }
 
-  private connectWithDatabase(){
-    const server = '127.0.0.1:27017'
-    const database = 'rateItUp'
+  private connectWithDatabase() {
+    const server = "127.0.0.1:27017";
+    const database = "rateItUp";
 
-    mongoose.connect(`mongodb://${server}/${database}`)
-    .then(() => {
-        console.log('Database connection successfull')
-    }).catch((err:any) => {
-        console.log('Database connection error : ' + err)
-    })
+    mongoose
+      .connect(`mongodb://${server}/${database}`)
+      .then(() => {
+        console.log("Database connection successfull");
+      })
+      .catch((err: any) => {
+        console.log("Database connection error : " + err);
+      });
   }
 
-  private loadEndpoints(){
-    this.app.use("/api/v1/users", require('./routes/v1/user.routes'))
-    this.app.use("/api/v1/coins", require('./routes/v1/coins.routes'))
-    this.app.use("/api/v1/ratings", require('./routes/v1/ratings.routes'))
-    this.app.use("/api/v1/transactions", require('./routes/v1/transactions.routes'))
+  private loadEndpoints() {
+    this.app.use("/api/v1/users", require("./routes/v1/user.routes"));
+    this.app.use("/api/v1/coins", require("./routes/v1/coins.routes"));
+    this.app.use("/api/v1/ratings", require("./routes/v1/ratings.routes"));
+    this.app.use(
+      "/api/v1/transactions",
+      require("./routes/v1/transactions.routes")
+    );
   }
 
   private start() {

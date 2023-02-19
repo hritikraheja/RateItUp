@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "Rate It Up",
+  "description": "An interesting and rewarding website reting system.",
+  "version": "1.0",
+  "action" : {
+    "default_popup": "build/index.html",
+    "default_icon": "build/logo512.png"
+  }
+}
