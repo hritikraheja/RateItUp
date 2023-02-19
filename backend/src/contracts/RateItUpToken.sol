@@ -1,7 +1,7 @@
 //SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.0;
 
-import "../node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "../../node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 contract RateItUpToken is ERC20 {
     address public _owner;
@@ -10,6 +10,8 @@ contract RateItUpToken is ERC20 {
         _mint(address(this), initialSupply);
         _owner = msg.sender;
     }
+
+    event TokensSentFromContract(address _receiver, uint amount);
 
     modifier onlyOwner() {
         require(msg.sender == _owner, "Only owner can call this function");
@@ -37,6 +39,7 @@ contract RateItUpToken is ERC20 {
     function sendToken(address _receiver, uint _amount) public onlyOwner{
         require(_amount <= balanceOf(address(this)), "Withdrawal amount is more than balance");
         _transfer(address(this), _receiver, _amount);
+        emit TokensSentFromContract(_receiver, _amount);
     }
 
     /**

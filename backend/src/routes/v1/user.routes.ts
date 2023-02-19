@@ -16,6 +16,19 @@ router.get(
   Auth.BasicAuth,
   UsersController.getUserById)
 
+
+router.get(
+  '/tokenBalanceInWallet',
+  Auth.BasicAuth,
+  Auth.UserAuth,
+  UsersController.getTokenBalanceInWallet
+)
+
+router.get('/checkWalletAdded',
+Auth.BasicAuth, 
+Auth.UserAuth, 
+UsersController.checkWalletAdded)
+
 router.get(
   "/me",
   Auth.BasicAuth,

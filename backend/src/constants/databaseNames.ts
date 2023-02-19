@@ -1,4 +1,5 @@
 export const DATABASE_NAMES = Object.freeze({
     USERS: 'Users',
-    RATINGS : 'Ratings'
+    RATINGS : 'Ratings',
+    TRANSACTIONS : 'Transactions'
 })

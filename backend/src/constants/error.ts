@@ -75,5 +75,9 @@ export const ERROR = Object.freeze({
     INSUFFICIENT_COINS : {
         code : ERROR_CODES[406],
         message : "Insufficient coins"
+    },
+    WALLET_ADDRESS_NOT_FOUND : {
+        code : ERROR_CODES[400],
+        message : "Wallet address not found for this user."
     }
 })

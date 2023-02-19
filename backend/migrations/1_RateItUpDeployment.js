@@ -1,5 +1,6 @@
 const RateItUpToken = artifacts.require("RateItUpToken");
+var Web3 = require('web3')
 
 module.exports = function(deployer) {
-  deployer.deploy(RateItUpToken, 10000000);
+  deployer.deploy(RateItUpToken, Web3.utils.toWei('10000000', 'ether'));
 };

@@ -3,6 +3,7 @@ import { MongoDao } from "../daoLayer/mongoDao";
 import { SUCCESS } from "../constants/succes";
 import { ERROR } from "../constants/error";
 import * as bcrypt from "bcrypt";
+import { getRateItUpTokenDaoInstance } from "../daoLayer/rateItUpTokenDao";
 import { createJwtToken, verifyJwtToken } from "../utils/helpers";
 require('dotenv').config();
 
@@ -53,6 +54,27 @@ export const UsersController = {
         .status(ERROR.INTERNAL_SERVER_ERROR_500.code)
         .send({ ...ERROR.INTERNAL_SERVER_ERROR_500, databaseError: err });
     }
+  },
+  getTokenBalanceInWallet : async(req : any, res : any) => {
+    try{
+      let token = req.headers[<string>process.env.JWT_HEADER_KEY]
+      let tokenData = await verifyJwtToken(token)
+      let user = await usersDao.findAll({_id : tokenData.id}, {})
+      let userDetails = user[0]
+      if(userDetails.walletAddress){
+        let contractInstance = getRateItUpTokenDaoInstance()
+        let balance = await contractInstance.getTokenBalanceOfAddress(<string>userDetails.walletAddress)
+        return res.status(SUCCESS.GET_200.code).json({
+          result : balance
+        })
+      } else {
+        return res.status(ERROR.WALLET_ADDRESS_NOT_FOUND.code).send(ERROR.WALLET_ADDRESS_NOT_FOUND)
+      }
+     } catch (err : any){
+      res
+          .status(ERROR.INTERNAL_SERVER_ERROR_500.code)
+          .send({ ...ERROR.INTERNAL_SERVER_ERROR_500, databaseError: err });
+     }
   },
   getUserByToken : async (req: any, res : any) => {
     try{
@@ -145,5 +167,26 @@ export const UsersController = {
         .status(ERROR.INTERNAL_SERVER_ERROR_500.code)
         .send({ ...ERROR.INTERNAL_SERVER_ERROR_500, databaseError: err });
     }
+  },
+  checkWalletAdded : async(req : any, res : any) => {
+    try{
+      let token = req.headers[<string>process.env.JWT_HEADER_KEY]
+      let tokenData = await verifyJwtToken(token)
+      let user = await usersDao.findAll({_id : tokenData.id}, {})
+      let userDetails = user[0]
+      if(userDetails.walletAddress){
+        return res.status(SUCCESS.GET_200.code).json({
+          result : true
+        })
+      } else {
+        return res.status(SUCCESS.GET_200.code).json({
+          result : false
+        })
+      }
+     } catch (err : any){
+      res
+          .status(ERROR.INTERNAL_SERVER_ERROR_500.code)
+          .send({ ...ERROR.INTERNAL_SERVER_ERROR_500, databaseError: err });
+     }
   }
 };

@@ -27,8 +27,8 @@ module.exports = {
   mocha: {
     timeout: 100000,
   },
-  contracts_directory: './contracts/',
-  contracts_build_directory: './abis/',
+  contracts_directory: './src/contracts/',
+  contracts_build_directory: './src/abis/',
   compilers: {
     solc: {
       version: "0.8.17",

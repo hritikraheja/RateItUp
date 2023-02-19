@@ -3,6 +3,7 @@ import * as mongoose from "mongoose";
 import express from "express";
 import * as bodyParser from "body-parser";
 import { AppCreator } from "./interfaces/AppCreator";
+import {getRateItUpTokenDaoInstance } from "./daoLayer/rateItUpTokenDao";
 
 export class App implements AppCreator {
   private static instance: App;
@@ -72,6 +73,7 @@ export class App implements AppCreator {
     this.app.use("/api/v1/users", require('./routes/v1/user.routes'))
     this.app.use("/api/v1/coins", require('./routes/v1/coins.routes'))
     this.app.use("/api/v1/ratings", require('./routes/v1/ratings.routes'))
+    this.app.use("/api/v1/transactions", require('./routes/v1/transactions.routes'))
   }
 
   private start() {
