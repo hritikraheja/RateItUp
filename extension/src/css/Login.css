@@ -1,0 +1,148 @@
+.animate__animated.animate__fadeInDown {
+    --animate-duration: 500ms;
+  }
+
+#login{
+    background-image: url('../assets/loginBackground.svg');
+    padding-top: 40px;
+    padding-bottom: 75px;
+    position: relative;
+}
+
+#login #header div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+#login #header div img{
+    width: 70px;
+}
+
+#login #header div span{
+    width: fit-content;
+    display: flex;
+    color: white;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 35px;
+}
+
+#login #header #phrase{
+    color : #8bd8bd;
+    font-size: 15px;
+    line-height: 18px;
+}
+
+#login #footerImg{
+    position : absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+}
+
+#login #welcomeNote{
+    margin-top: 30px;
+}
+
+#login #welcomeNote #head{
+    display: block;
+    font-size: 28px;
+    color: white;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+}
+
+#login #welcomeNote #subhead{
+    display: block;
+    font-size: 14px;
+    color: white;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#login #emailInput{
+    display: block;
+    margin-top: 25px;
+    width: 70%;
+    height: 40px;
+    border-radius: 8px;
+    padding: 5px 10px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 14px;
+    outline: none;
+    border: none;
+    background-color: #e8f0fd;
+}
+
+#login #passwordInput{
+    display: flex;
+    margin-top: 10px;
+    width: 70%;
+    height: 40px;
+    padding: 0px 10px;
+    justify-self: center;
+    border-radius: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #e8f0fd;
+}
+
+#login #passwordInput input{
+    width: 85%;
+    /* height: 40px;  */
+    padding: 0px 0px;
+    font-size: 14px;
+    background: none;
+    outline: none;
+    border: none;
+}
+
+input[type='password'] {
+    font-family: Verdana;
+}
+
+#login #passwordInput i{
+    width: 15%;
+    height: 40px;
+    font-size: 18px;
+    line-height: 40px;
+    cursor: pointer;
+}
+
+#login #emailInput:focus, #login #passwordInput:focus{
+    outline: 3px solid #e9c46b;
+}
+
+#login .warningMessage{
+    color: #ed4337;
+    display: block;
+    font-size: 11px;
+    text-align: left;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2px;
+}
+
+#login #continueButton, #login #loginButton{
+    width: 40%;
+    height: 35px;
+    font-size: 14px;
+    font-weight: 700;
+    background-color: #e9c46b;
+    color: #243665;
+    border-radius: 8px;
+    margin-top: 12px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+
+#login #continueButton:hover, #login #loginButton:hover{
+    transform: scale(1.025);
+}

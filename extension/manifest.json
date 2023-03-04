@@ -5,6 +5,6 @@
   "version": "1.0",
   "action" : {
     "default_popup": "build/index.html",
-    "default_icon": "build/logo512.png"
+    "default_icon": "src/assets/logo.png"
   }
 }
