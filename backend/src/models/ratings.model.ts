@@ -7,6 +7,7 @@ import { DOMAIN_VALIDATION_REGEX } from "../constants/constants";
 export interface IRatingModel extends Document {
   user: Types.ObjectId;
   domain: String;
+  url : String;
   ratings: [Number];
   comment: String;
   createdOn: Number;
@@ -24,6 +25,10 @@ export const RatingSchema: any = new Schema({
       },
       message: "Invalid domain name format",
     },
+  },
+  url : {
+    type : String,
+    required: true
   },
   ratings: {
     type: [Number],

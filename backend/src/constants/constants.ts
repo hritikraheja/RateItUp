@@ -66,4 +66,4 @@ export const ORDER_DELIVERY_STATUS = Object.freeze({
   UNDELIVERED : 5
 })
 
-export const DOMAIN_VALIDATION_REGEX = /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/i
+export const  DOMAIN_VALIDATION_REGEX = /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/i

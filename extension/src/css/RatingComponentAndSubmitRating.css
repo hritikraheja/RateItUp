@@ -1,0 +1,65 @@
+#ratingComponent #head{
+    font-size: 16px;
+    margin: 0px;
+    margin-bottom: 15px;
+    font-weight: 400;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#ratingComponent #emoji{
+    margin-top: 10px;
+}
+
+#submitRating{
+    width: 100%;
+    margin: 0px 0px 0px 15px;
+}
+
+#submitRating #rating{
+    display: flex;
+}
+
+#submitRating #rating p{
+    font-size: 16px;
+    margin: 5px 0px;
+    color : white;
+    cursor: default;
+}
+
+#submitRating #rating #stars{
+    font-size: 18px;
+    margin-left: auto;
+}
+
+#submitRating #rating #stars i{
+    color: gold;
+    margin: 0px 2px;
+}
+
+#submitRating #reviewBox{
+    width: 250px;
+    height: 70px;
+    margin-top: 15px;
+    font-size: 13px;
+    border-radius: 12px;
+    padding: 10px;
+}
+
+#submitRating #submitBtn{
+    background-color: #8bd8bd;
+    color: #243665;
+    font-size: 15px;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    width: 180px;
+    height: 40px;
+    border-radius: 8px;
+    margin-top: 15px;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+}
+
+#submitRating #submitBtn:hover{
+    transform: scale(1.05);
+}

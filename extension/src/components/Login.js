@@ -3,8 +3,9 @@ import "../css/Login.css";
 import logo from "../assets/logoTransparent.png";
 import loginFooterImage from "../assets/loginFooterImage.svg";
 import { checkIfUserExist, loginUser } from "../services/UserService";
-import Signup from './SignUp'
-import 'animate.css'
+import Signup from "./SignUp";
+import "animate.css";
+import { checkEmailValidity } from "../validations";
 
 const COMPONENT_STATES = {
   BASIC_LOGIN: 0,
@@ -27,26 +28,20 @@ const Login = (props) => {
     if (isEmailInvalid) {
       setEmailInvalid(false);
     }
-    if(componentState != COMPONENT_STATES.BASIC_LOGIN){
-      setComponentState(COMPONENT_STATES.BASIC_LOGIN)
+    if (componentState != COMPONENT_STATES.BASIC_LOGIN) {
+      setComponentState(COMPONENT_STATES.BASIC_LOGIN);
     }
   };
 
   const passwordInputOnChange = (e) => {
     setPassword(e.target.value);
-    if(isPasswordIncorrect){
-      setPasswordIncorrect(false)
+    if (isPasswordIncorrect) {
+      setPasswordIncorrect(false);
     }
   };
 
-  const checkEmailValidity = () => {
-    const regex =
-      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    return email!='' && regex.test(email);
-  };
-
   const continueButtonOnClick = async () => {
-    if (!checkEmailValidity()) {
+    if (!checkEmailValidity(email)) {
       setEmailInvalid(true);
     } else {
       setEmailInvalid(false);
@@ -59,31 +54,31 @@ const Login = (props) => {
           setComponentState(COMPONENT_STATES.SIGN_UP_NEW_USER);
         }
       } else {
-        props.createErrorNotification('Server Error!')
+        props.createErrorNotification("Server Error!");
       }
     }
   };
 
   const loginButtonOnClick = async () => {
-    if(!password){
+    if (!password) {
       return;
     }
     let response = await loginUser(email, password);
-    if(response.status == '200'){
-      let loginToken = response.data
-      localStorage.setItem(process.env.REACT_APP_LOGIN_TOKEN_KEY, loginToken)
-      window.location.reload(false)
-    } else if(response.status == '401') {
-      setPasswordIncorrect(true)
+    if (response.status == "200") {
+      let loginToken = response.data;
+      localStorage.setItem(process.env.REACT_APP_LOGIN_TOKEN_KEY, loginToken);
+      window.location.reload(false);
+    } else if (response.status == "401") {
+      setPasswordIncorrect(true);
     } else {
-      props.createErrorNotification('Server Error!')
+      props.createErrorNotification("Server Error!");
     }
   };
 
   const goBackToLogin = (email) => {
-    setEmail(email)
-    setComponentState(COMPONENT_STATES.BASIC_LOGIN)
-  }
+    setEmail(email);
+    setComponentState(COMPONENT_STATES.BASIC_LOGIN);
+  };
 
   return (
     <div>
@@ -124,11 +119,13 @@ const Login = (props) => {
           )}
           {componentState == COMPONENT_STATES.LOGIN_WITH_PASSWORD && (
             <div>
-              <div id="passwordInput" style={{
-                    outline: isPasswordIncorrect
-                      ? "1.5px solid #ed4337"
-                      : "none",
-                  }} className="animate__animated animate__fadeInDown">
+              <div
+                id="passwordInput"
+                style={{
+                  outline: isPasswordIncorrect ? "1.5px solid #ed4337" : "none",
+                }}
+                className="animate__animated animate__fadeInDown"
+              >
                 <input
                   placeholder="Password"
                   onChange={passwordInputOnChange}
@@ -165,7 +162,12 @@ const Login = (props) => {
         </div>
       )}
       {componentState == COMPONENT_STATES.SIGN_UP_NEW_USER && (
-        <Signup goBackToLogin={goBackToLogin} email={email}></Signup>
+        <Signup
+          goBackToLogin={goBackToLogin}
+          email={email}
+          createErrorNotification={props.createErrorNotification}
+          createSuccessNotification={props.createSuccessNotification}
+        ></Signup>
       )}
     </div>
   );

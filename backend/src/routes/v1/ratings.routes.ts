@@ -30,6 +30,7 @@ router.post(
   celebrate({
     body: {
       domain: Joi.string().required().regex(DOMAIN_VALIDATION_REGEX),
+      url : Joi.string().required(),
       ratings: Joi.array()
         .items(Joi.number())
         .length(RATING_PARAMETERS.length)
