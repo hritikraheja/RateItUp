@@ -1,0 +1,104 @@
+#main {
+    background-image: url('../assets/loginBackground.svg');
+    padding-top: 20px;
+    padding-bottom: 75px;
+    position: relative;
+}
+
+#main nav{
+    display: flex;
+    width: 90%;
+    justify-content: space-between;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#main #nav-head div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: auto;
+}
+
+#main #nav-head div img{
+    width: 50px;
+}
+
+#main #nav-head div span{
+    width: fit-content;
+    display: flex;
+    color: white;
+    font-weight: 500;
+    font-size: 21px;
+    line-height: 25px;
+}
+
+#main #nav-head #phrase{
+    color : #8bd8bd;
+    font-size: 14px;
+    line-height: 12px;
+}
+
+#main nav #userIconContainer{
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+}
+
+#main nav #userIconContainer button{
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+#main nav #userIconContainer button i{
+    font-size: 32px;
+    line-height: 35px;
+    color : #8bd8bd;
+}
+
+#main nav #userIconContainer span{
+    width: 15px;
+    height: 15px;
+    background-color: gold;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+
+#main #footerImg{
+    position : absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+}
+
+#main #domainDiv{
+    display: flex;
+    width: fit-content;
+    margin-top: 30px;
+    padding: 10px 25px 10px 10px;
+    height: 20px;
+    background-color: #8bd8bd;
+    border-radius: 0px 24px 24px 0px;
+    justify-content: 'center';
+}
+
+#main #domainDiv p{
+    margin: 0px;
+    font-size: 15px;
+    line-height: 20px;
+    height: 20px;
+    color: #243665;
+    margin-left: 10px;
+    font-weight: 600;
+}
+
+#main #loader{
+    width: fit-content;
+    height: fit-content;
+    margin: 80px auto;
+}

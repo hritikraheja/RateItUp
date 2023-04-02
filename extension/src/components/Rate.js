@@ -1,51 +1,39 @@
 import React, { useEffect, useState } from "react";
 import "../css/Rate.css";
-import '../css/RatingComponentAndSubmitRating.css'
-import logo from "../assets/logoTransparent.png";
-import loginFooterImage from "../assets/loginFooterImage.svg";
+import "../css/RatingComponentAndSubmitRating.css";
 import RatingComponent from "./RatingComponent";
 import SubmitRating from "./SubmitRating";
 import { RATING_PARAMETERS } from "../constants/RatingParameters";
 
 const Rate = (props) => {
-  const [domain, setDomain] = useState();
-  const [url, setUrl] = useState();
+  const { domain, url } = props;
   const [currentRatingState, setCurrentRatingState] = useState(0);
   const [rating, setRating] = useState(
     new Array(RATING_PARAMETERS.length).fill(0)
   );
   const [componentSeen, setComponentSeen] = useState(
     new Array(RATING_PARAMETERS.length + 1).fill(false)
-  )
+  );
 
   const updateRating = (index, newRating) => {
     let oldRating = [...rating];
     oldRating[index] = newRating;
     setRating(oldRating);
-    if(currentRatingState!= RATING_STATES.length && !componentSeen[currentRatingState+1]){
+    if (
+      currentRatingState < RATING_PARAMETERS.length &&
+      !componentSeen[currentRatingState + 1]
+    ) {
       setTimeout(() => {
-        moveToNextState()
+        moveToNextState();
       }, 700);
     }
   };
 
   useEffect(() => {
-    const queryInfo = { active: true, lastFocusedWindow: true };
-    chrome.tabs &&
-      chrome.tabs.query(queryInfo, (tabs) => {
-        let url = new URL(tabs[0].url);
-        let domain = url.hostname;
-        domain = domain.replace("www.", "");
-        setUrl(tabs[0].url);
-        setDomain(domain);
-      });
-  }, []);
-
-  useEffect(() => {
-    let oldStack = [...componentSeen]
+    let oldStack = [...componentSeen];
     oldStack[currentRatingState] = true;
-    setComponentSeen(oldStack)
-  }, [currentRatingState])
+    setComponentSeen(oldStack);
+  }, [currentRatingState]);
 
   const getStateComponent = () => {
     return RATING_STATES[currentRatingState];
@@ -62,55 +50,51 @@ const Rate = (props) => {
         />
       );
     }),
-    <SubmitRating ratings={rating} />,
+    <SubmitRating
+      ratings={rating}
+      domain={domain}
+      url={url}
+      updateRating={updateRating}
+      showSuccessMessage={props.showSuccessMessage}
+      createErrorNotification={props.createErrorNotification}
+      createSuccessNotification={props.createSuccessNotification}
+    />,
   ];
 
   const moveToPreviousState = () => {
-    if(document.getElementById('ratingComponent')){
-      document.getElementById('ratingComponent').className = 'animate__animated animate__slideInLeft'
+    if (document.getElementById("ratingComponent")) {
+      document.getElementById("ratingComponent").className =
+        "animate__animated animate__slideInLeft";
       setTimeout(() => {
-        document.getElementById('ratingComponent').className = ''
-      }, 500)
+        document.getElementById("ratingComponent").className = "";
+      }, 500);
     }
     setCurrentRatingState(currentRatingState - 1);
   };
 
   const moveToNextState = () => {
     setCurrentRatingState(currentRatingState + 1);
-    if(currentRatingState == RATING_STATES.length - 1){
-      if(document.getElementById('submitRating')){
-        document.getElementById('submitRating').className = 'animate__animated animate__slideInRight'
+    if (currentRatingState == RATING_STATES.length - 1) {
+      if (document.getElementById("submitRating")) {
+        document.getElementById("submitRating").className =
+          "animate__animated animate__slideInRight";
         setTimeout(() => {
-          document.getElementById('submitRating').className = ''
-        }, 500)
+          document.getElementById("submitRating").className = "";
+        }, 500);
       }
     } else {
-      if(document.getElementById('ratingComponent')){
-        document.getElementById('ratingComponent').className = 'animate__animated animate__slideInRight'
+      if (document.getElementById("ratingComponent")) {
+        document.getElementById("ratingComponent").className =
+          "animate__animated animate__slideInRight";
         setTimeout(() => {
-          document.getElementById('ratingComponent').className = ''
-        }, 500)
+          document.getElementById("ratingComponent").className = "";
+        }, 500);
       }
     }
   };
 
   return (
     <div id="rate">
-      <nav>
-        <div id="nav-head">
-          <div>
-            <img src={logo} alt="RateItUp Logo"></img>
-            <span>
-              Rate
-              <br />
-              It Up
-            </span>
-          </div>
-        </div>
-        <button>
-          <i className="fa fa-user-circle"></i>
-        </button>
-      </nav>
       <p id="head">
         Share your experience
         <br />
@@ -141,7 +125,8 @@ const Rate = (props) => {
           onClick={moveToNextState}
           style={{
             visibility:
-              (currentRatingState < RATING_PARAMETERS.length && rating[currentRatingState] != 0)
+              currentRatingState < RATING_PARAMETERS.length &&
+              rating[currentRatingState] != 0
                 ? "visible"
                 : "hidden",
           }}
@@ -157,7 +142,6 @@ const Rate = (props) => {
       >
         Logout
       </button> */}
-      <img id="footerImg" src={loginFooterImage} alt="Footer"></img>
     </div>
   );
 };

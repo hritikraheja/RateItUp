@@ -9,10 +9,10 @@ import {
   NotificationContainer,
   NotificationManager,
 } from "react-notifications";
-import Rate from "./components/Rate";
+import Main from "./components/Main";
 
 const App = () => {
-  const [loginCredentials, setLoginCredentials] = useState("");
+  const [loginCredentials, setLoginCredentials] = useState(null);
 
   useEffect(() => {
     setLoginCredentials(
@@ -36,8 +36,12 @@ const App = () => {
             exact
             path="/"
             element={
-              loginCredentials != 'null' ? (
-                <Rate></Rate>
+              loginCredentials ? (
+                <Main
+                loginCredentials = {loginCredentials}
+                createErrorNotification={createErrorNotification}
+                createSuccessNotification={createSuccessNotification}
+                ></Main>
               ) : (
                 <Login
                   createErrorNotification={createErrorNotification}

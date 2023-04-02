@@ -9,7 +9,7 @@ export interface IRatingModel extends Document {
   domain: String;
   url : String;
   ratings: [Number];
-  comment: String;
+  review: String;
   createdOn: Number;
   updatedOn: Number;
 }
@@ -40,7 +40,7 @@ export const RatingSchema: any = new Schema({
       message: "Invalid number of parameters",
     },
   },
-  comment: { type: String, required: false },
+  review: { type: String, required: false },
   createdOn: { type: Number, default: dateConstants.currentTimeStamp() },
   updatedOn: { type: Number, default: dateConstants.currentTimeStamp() },
 });

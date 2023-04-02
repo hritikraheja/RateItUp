@@ -29,13 +29,13 @@ router.post(
   Auth.UserAuth,
   celebrate({
     body: {
-      domain: Joi.string().required().regex(DOMAIN_VALIDATION_REGEX),
+      domain: Joi.string().required(),
       url : Joi.string().required(),
       ratings: Joi.array()
         .items(Joi.number())
         .length(RATING_PARAMETERS.length)
         .required(),
-      comment: Joi.string().optional(),
+      review: Joi.string().allow('').optional(),
     },
   }),
   RatingsController.addRating
@@ -52,7 +52,8 @@ router.put(
         .items(Joi.number())
         .length(RATING_PARAMETERS.length)
         .optional(),
-      comment: Joi.string().optional(),
+      review: Joi.string().optional(),
+      url: Joi.string().optional(),
     },
   }),
   RatingsController.updateRating

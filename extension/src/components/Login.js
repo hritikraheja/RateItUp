@@ -6,6 +6,7 @@ import { checkIfUserExist, loginUser } from "../services/UserService";
 import Signup from "./SignUp";
 import "animate.css";
 import { checkEmailValidity } from "../validations";
+import { RESPONSE_CODES } from "../constants/ResponseCodes";
 
 const COMPONENT_STATES = {
   BASIC_LOGIN: 0,
@@ -46,7 +47,7 @@ const Login = (props) => {
     } else {
       setEmailInvalid(false);
       let response = await checkIfUserExist(email);
-      if (response.status == "200") {
+      if (response.status == RESPONSE_CODES.RESPONSE_OK) {
         let doUserExist = response.data;
         if (doUserExist) {
           setComponentState(COMPONENT_STATES.LOGIN_WITH_PASSWORD);
@@ -64,11 +65,11 @@ const Login = (props) => {
       return;
     }
     let response = await loginUser(email, password);
-    if (response.status == "200") {
+    if (response.status == RESPONSE_CODES.RESPONSE_OK) {
       let loginToken = response.data;
       localStorage.setItem(process.env.REACT_APP_LOGIN_TOKEN_KEY, loginToken);
       window.location.reload(false);
-    } else if (response.status == "401") {
+    } else if (response.status == RESPONSE_CODES.UNAUTHORISED) {
       setPasswordIncorrect(true);
     } else {
       props.createErrorNotification("Server Error!");

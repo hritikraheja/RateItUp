@@ -1,0 +1,92 @@
+#updateRating{
+    width: 100%;
+    margin-top: 30px;
+}
+
+#updateRating #head{
+    display: block;
+    font-size: 24px;
+    color: white;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    margin: 0px;
+    margin-top: 30px;
+}
+
+#updateRating #head span{
+    display: block;
+    font-size: 12px;
+    color: #8bd8bd;
+    font-weight: 300;
+}
+
+#updateRating #ratingsAndReview{
+    transform: scaleY(0);
+    height: 0px;
+    transition: transform 0.25s ease-in;
+    transform-origin: top;
+}
+
+#updateRating #ratings{
+    margin-top: 30px;
+}
+
+#updateRating #rating{
+    display: flex;
+    margin: 5px 0px;
+    width: 90%;
+    margin: 0px auto;
+}
+
+#updateRating #rating p{
+    font-size: 16px;
+    margin: 5px 0px;
+    color : white;
+    cursor: default;
+}
+
+#updateRating #rating #stars{
+    margin-left: auto;
+}
+
+#updateRating #rating #stars i{
+    color: gold;
+    margin: 0px 5px;
+    cursor: pointer;
+    font-size: 20px;
+    line-height: 32px;
+}
+
+#updateRating #reviewBox{
+    width: 250px;
+    height: 70px;
+    margin-top: 15px;
+    font-size: 13px;
+    border-radius: 12px;
+    padding: 10px;
+}
+
+#updateRating #subHead{
+    margin: 0px;
+    margin-top: 30px;
+    color: #fff;
+}
+
+#updateRating #updateBtn{
+    background-color: #8bd8bd;
+    color: #243665;
+    font-size: 15px;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    width: 180px;
+    height: 40px;
+    border-radius: 8px;
+    margin-top: 15px;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+}
+
+#updateRating #updateBtn:hover{
+    transform: scale(1.05);
+}

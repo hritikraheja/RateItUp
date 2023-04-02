@@ -18,7 +18,8 @@ export const RatingsController = {
         _id : 0,
         domain : 1,
         ratings : 1,
-        comment : 1,
+        review : 1,
+        url : 1,
         createdOn : 1,
         updatedOn : 1,
       });
@@ -41,11 +42,16 @@ export const RatingsController = {
         _id : 0,
         domain : 1,
         ratings : 1,
-        comment : 1,
+        url : 1,
+        review : 1,
         createdOn : 1,
         updatedOn : 1
       });
-      res.status(SUCCESS.GET_200.code).send({ result: result });
+      if(result.length == 0){
+        return res.status(SUCCESS.GET_200.code).send({ result: null});
+      } else {
+        return res.status(SUCCESS.GET_200.code).send({ result: result[0] });
+      }
     } catch (err: any) {
       res
         .status(ERROR.INTERNAL_SERVER_ERROR_500.code)
@@ -61,7 +67,8 @@ export const RatingsController = {
         _id : 0,
         user : 1,
         ratings : 1,
-        comment : 1,
+        review : 1,
+        url : 1,
         createdOn : 1,
         updatedOn : 1
       });
@@ -96,7 +103,8 @@ export const RatingsController = {
       let reqBody = req.body;
       let updates = {
         ratings : reqBody.ratings,
-        comment : reqBody.comment
+        review : reqBody.review,
+        url : reqBody.url
       }
       await ratingsDao.update({user : tokenData.id, domain : reqBody.domain}, updates)
       res.status(SUCCESS.PUT_200_DATA.code).json(SUCCESS.PUT_200_DATA);

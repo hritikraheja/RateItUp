@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ERRORS } from "../constants/Error";
+import { RESPONSE_CODES } from "../constants/ResponseCodes";
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 const BASIC_AUTH_USER = process.env.REACT_APP_BASIC_AUTH_USER;
@@ -30,7 +30,7 @@ export const checkIfUserExist = async (email) => {
       };
     } else {
       return {
-        status: ERRORS.SERVER_NOT_WORKING,
+        status: RESPONSE_CODES.SERVER_NOT_WORKING,
         data: null,
       };
     }
@@ -62,7 +62,7 @@ export const loginUser = async (email, password) => {
       };
     } else {
       return {
-        status: ERRORS.SERVER_NOT_WORKING,
+        status: RESPONSE_CODES.SERVER_NOT_WORKING,
         data: null,
       };
     }
@@ -94,7 +94,7 @@ export const createUser = async (email, name, password) => {
       };
     } else {
       return {
-        status: ERRORS.SERVER_NOT_WORKING,
+        status: RESPONSE_CODES.SERVER_NOT_WORKING,
         data: null,
       };
     }

@@ -4,6 +4,7 @@ import loginFooterImage from "../assets/loginFooterImage.svg";
 import "../css/SignUp.css";
 import { validateNewPassword } from "../validations";
 import { createUser } from "../services/UserService";
+import { RESPONSE_CODES } from "../constants/ResponseCodes";
 
 const SignUp = (props) => {
   const [name, setName] = useState("");
@@ -47,12 +48,12 @@ const SignUp = (props) => {
       return;
     } else {
       let response = await createUser(props.email, name, password);
-      if (response.status == "201") {
+      if (response.status == RESPONSE_CODES.RESPONSE_CREATED) {
         props.createSuccessNotification("User created successfully!")
         setTimeout(() => {
             props.goBackToLogin(props.email);
         }, 1500)
-      } else if (response.status == "209") {
+      } else if (response.status == RESPONSE_CODES.RESPONSE_ALREADY_EXIST) {
         props.createErrorNotification("Email already exist.");
       } else {
         props.createErrorNotification("Server Error!");
